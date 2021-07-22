@@ -1,0 +1,129 @@
+apply plugin: 'com.android.library'
+apply from: '../build_gradle/common.gradle'
+def and = rootProject.ext.official
+def ktx = rootProject.ext.ktx
+def dpc = rootProject.ext.dependencies
+
+android {
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+}
+
+dependencies {
+
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(dir: 'libs', include: ['*.arr'])
+
+    api and["appcompat"]
+    api and["constraintlayout"]
+    api and["multidex"]
+    api and["cardview"]
+    api and["recyclerview"]
+    api and["flexbox"]
+    api and["viewpager2"]
+    api and["material"]
+    api and["gson"]
+    api and["kotlin-stdlib"]
+    api and["kotlin-reflect"]
+    api and["lifecycle-viewmodel-savedstate"]
+    api and["lifecycle-service"]
+    api and["lifecycle-process"]
+    api and["room-runtime"]
+    api ktx["collection"]
+    api ktx["core"]
+    api ktx["kotlinx-coroutines-core"]
+    api ktx["kotlinx-coroutines-android"]
+    api ktx["navigation-fragment"]
+    api ktx["navigation-ui"]
+    api ktx["lifecycle-viewmodel"]
+    api ktx["lifecycle-livedata"]
+    api ktx["lifecycle-runtime"]
+    api ktx["lifecycle-reactivestreams"]
+    api ktx["paging-runtime"]
+    api ktx["room"]
+    api ktx["work-runtime"]
+    api dpc["arouter-api"]
+    api dpc["utilcodex"]
+    /*anko - 已经废弃 --> Splitties:Views DSL*/
+    api dpc["anko"]
+    api dpc["anko-recyclerview"]
+    api dpc["anko-recyclerview-coroutines"]
+    api dpc["anko-constraint-layout"]
+    api dpc["anko-cardview"]
+
+    api dpc["brvah"]
+    //网络框架 -- start
+    api dpc["okhttp3"]
+    api dpc["okhttp3-logging"]
+    api dpc["okhttp3-progressmanager"]
+    api dpc["rxhttp"]
+    api dpc["rxhttp-coroutine"]
+    //网络框架 -- end
+    api dpc["coil"]
+    api dpc["coil-gif"]
+    api dpc["coil-svg"]
+    api dpc["glide"]
+    api dpc["livebus"]
+    api dpc["mmkv"]
+    api dpc["qiniu-dns"]
+    //koin
+    api dpc["koin-android"]
+    //api dpc["koin-ext"]
+    api dpc["koin-workmanager"]
+    api dpc["koin-compose"]
+
+    api dpc["shadowlayout"]
+    api dpc["animations"]
+
+    api dpc["immersionbar"]
+    api dpc["immersionbar-fragment"]
+    api ktx["immersionbar-ktx"]
+
+    api dpc["magicIndicator"]
+    api dpc["qiniu"]
+    api dpc["pictureSelector"]
+    api dpc["starrySkyX"]
+    api dpc["exoplayer"]
+    api dpc["mojito:core"]
+    api dpc["mojito:SketchImageFactory"]
+    api dpc["mojito:GlideImageLoader"]
+
+    api dpc["bugly"]
+
+    api dpc["brvah"]
+
+
+    //api "androidx.startup:startup-runtime:1.0.0"
+    api 'io.github.idisfkj:android-startup:1.0.62'
+
+    api 'androidx.compose.ui:ui:1.0.0-rc02'
+    // Tooling support (Previews, etc.)
+    api 'androidx.compose.ui:ui-tooling:1.0.0-rc02'
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    api 'androidx.compose.foundation:foundation:1.0.0-rc02'
+    // Material Design
+    api 'androidx.compose.material:material:1.0.0-rc02'
+    // Material design icons
+    api 'androidx.compose.material:material-icons-core:1.0.0-rc02'
+    api 'androidx.compose.material:material-icons-extended:1.0.0-rc02'
+    // Integration with activities
+    api 'androidx.activity:activity-compose:1.3.0-rc02'
+    // Integration with ViewModels
+    api 'androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07'
+    // Integration with observables
+    api 'androidx.compose.runtime:runtime-livedata:1.0.0-rc02'
+    api 'androidx.compose.runtime:runtime-rxjava2:1.0.0-rc02'
+
+    api "androidx.navigation:navigation-compose:2.4.0-alpha04"
+
+    api "com.google.accompanist:accompanist-coil:0.13.0"
+    api "com.google.accompanist:accompanist-systemuicontroller:0.13.0"
+    api "com.google.accompanist:accompanist-appcompat-theme:0.13.0"
+    api "com.google.accompanist:accompanist-pager:0.13.0"
+    api "com.google.accompanist:accompanist-flowlayout:0.13.0"
+    api "com.google.accompanist:accompanist-permissions:0.13.0"
+    api "com.google.accompanist:accompanist-placeholder:0.13.0"
+    api "com.google.accompanist:accompanist-swiperefresh:0.13.0"
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--    <com.pr1n.androidtest.custom.CustomView-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"/>-->
+
+        <!--    <com.pr1n.androidtest.custom.MaterialEditText-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:hint="Hello"-->
+        <!--        android:textColor="#333333"-->
+        <!--        android:textColorHint="#999999" />-->
+
+        <!--        <com.pr1n.androidtest.custom.MultiTouchView-->
+        <!--            android:id="@+id/view"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent" />-->
+
+        <!--    <com.pr1n.androidtest.custom.ScalableImageView-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="match_parent" />-->
+
+        <!--        <com.pr1n.androidtest.custom.RippleView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            app:centerImageRes="@mipmap/avart"-->
+        <!--            app:centerImageSize="80dp"-->
+        <!--            app:delayMilliSeconds="450"-->
+        <!--            app:rippleCount="5"-->
+        <!--            app:rippleSize="5dp"-->
+        <!--            app:spreadColor="@color/colorAccent" />-->
+
+
+        <com.pr1n.androidtest.custom.LoadingView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!--        <Button-->
+        <!--            android:id="@+id/button"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content" />-->
+
+        <!--        <androidx.fragment.app.FragmentContainerView-->
+        <!--            android:id="@+id/containerView"-->
+        <!--            android:name="androidx.navigation.fragment.NavHostFragment"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            app:defaultNavHost="true" />-->
+
+    </FrameLayout>
+</layout>

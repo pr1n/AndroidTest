@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="1.7">
+      <module name="AndroidTest.Apes-Compiler" target="11" />
+      <module name="AndroidTest.app" target="11" />
+      <module name="AndroidTest.CommonSDK" target="11" />
+      <module name="AndroidTest.user" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

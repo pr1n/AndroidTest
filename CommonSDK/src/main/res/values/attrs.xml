@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- * 公共属性 * -->
+    <!-- 圆形 -->
+    <attr name="round_as_circle" format="boolean" />
+    <!-- 全部圆角半径 -->
+    <attr name="round_corner" format="integer|dimension" />
+    <!-- 针对各个角的半径 -->
+    <attr name="round_corner_top_left" format="integer|dimension" />
+    <attr name="round_corner_top_right" format="integer|dimension" />
+    <attr name="round_corner_bottom_left" format="integer|dimension" />
+    <attr name="round_corner_bottom_right" format="integer|dimension" />
+
+    <!-- 描边颜色／半径 -->
+    <attr name="stroke_color" format="color|reference" />
+    <attr name="stroke_width" format="integer|dimension" />
+
+    <!-- 是否剪裁 RCLayout 的背景 -->
+    <attr name="clip_background" format="boolean" />
+
+    <!-- 真正用于解析的属性 -->
+    <declare-styleable name="RCAttrs">
+        <attr name="round_as_circle" />
+        <attr name="round_corner" />
+        <attr name="round_corner_top_left" />
+        <attr name="round_corner_top_right" />
+        <attr name="round_corner_bottom_left" />
+        <attr name="round_corner_bottom_right" />
+        <attr name="stroke_color" />
+        <attr name="stroke_width" />
+        <attr name="clip_background" />
+    </declare-styleable>
+
+    <!-- 假体：用于提示 -->
+    <declare-styleable name="RCRelativeLayout">
+        <attr name="round_as_circle" />
+        <attr name="round_corner" />
+        <attr name="round_corner_top_left" />
+        <attr name="round_corner_top_right" />
+        <attr name="round_corner_bottom_left" />
+        <attr name="round_corner_bottom_right" />
+        <attr name="stroke_color" />
+        <attr name="stroke_width" />
+        <attr name="clip_background" />
+    </declare-styleable>
+
+    <!-- 假体：用于提示 -->
+    <declare-styleable name="RCLinearLayout">
+        <attr name="round_as_circle" />
+        <attr name="round_corner" />
+        <attr name="round_corner_top_left" />
+        <attr name="round_corner_top_right" />
+        <attr name="round_corner_bottom_left" />
+        <attr name="round_corner_bottom_right" />
+        <attr name="stroke_color" />
+        <attr name="stroke_width" />
+        <attr name="clip_background" />
+    </declare-styleable>
+
+    <!-- 假体：用于提示 -->
+    <declare-styleable name="RCFrameLayout">
+        <attr name="round_as_circle" />
+        <attr name="round_corner" />
+        <attr name="round_corner_top_left" />
+        <attr name="round_corner_top_right" />
+        <attr name="round_corner_bottom_left" />
+        <attr name="round_corner_bottom_right" />
+        <attr name="stroke_color" />
+        <attr name="stroke_width" />
+        <attr name="clip_background" />
+    </declare-styleable>
+
+    <!-- 假体：用于提示 -->
+    <declare-styleable name="RCImageView">
+        <attr name="round_as_circle" />
+        <attr name="round_corner" />
+        <attr name="round_corner_top_left" />
+        <attr name="round_corner_top_right" />
+        <attr name="round_corner_bottom_left" />
+        <attr name="round_corner_bottom_right" />
+        <attr name="stroke_color" />
+        <attr name="stroke_width" />
+        <attr name="clip_background" />
+    </declare-styleable>
+    <!--########################################## RecyclerViewPage #######################################################-->
+    <declare-styleable name="AutoPlayRecyclerView">
+        <attr name="timeInterval" format="integer" />
+        <attr name="direction" format="enum">
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+    </declare-styleable>
+    <!--########################################## ProgressView #######################################################-->
+    <attr name="progressTextSize" format="dimension" />
+    <attr name="progressTextColor" format="color" />
+    <attr name="progressTextOffset" format="dimension" />
+    <attr name="progressNormalColor" format="color" />
+    <attr name="progressReachColor" format="color" />
+    <attr name="progressNormalSize" format="dimension" />
+    <attr name="progressReachSize" format="dimension" />
+    <attr name="progressReachWidth" format="dimension" />
+    <attr name="progressNormalWidth" format="dimension" />
+    <attr name="progressTextVisible" format="boolean" />
+    <attr name="progressTextSkewX" format="dimension" />
+    <attr name="progressTextPrefix" format="string" />
+    <attr name="progressTextSuffix" format="string" />
+    <attr name="innerBackgroundColor" format="color" />
+
+    <declare-styleable name="HorizontalProgressView">
+        <attr name="progressNormalColor" />
+        <attr name="progressReachColor" />
+        <attr name="progressTextColor" />
+        <attr name="progressTextSize" />
+        <attr name="progressTextOffset" />
+        <attr name="progressNormalSize" />
+        <attr name="progressReachSize" />
+        <attr name="progressTextPosition" format="enum">
+            <enum name="TOP" value="1" />
+            <enum name="BOTTOM" value="-1" />
+            <enum name="CENTER" value="0" />
+        </attr>
+        <attr name="progressTextVisible" />
+        <attr name="progressTextSkewX" />
+        <attr name="progressTextPrefix" />
+        <attr name="progressTextSuffix" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleProgressView">
+        <attr name="progressNormalColor" />
+        <attr name="progressReachColor" />
+        <attr name="progressTextColor" />
+        <attr name="progressTextSize" />
+        <attr name="progressTextOffset" />
+        <attr name="progressNormalSize" />
+        <attr name="progressReachSize" />
+        <attr name="radius" format="dimension" />
+        <attr name="progressTextVisible" />
+        <attr name="progressStartArc" format="integer" />
+        <attr name="progressTextSkewX" />
+        <attr name="progressTextPrefix" />
+        <attr name="progressTextSuffix" />
+        <attr name="innerBackgroundColor" />
+        <attr name="progressStyle" format="enum">
+            <enum name="Normal" value="0" />
+            <enum name="FillInner" value="1" />
+            <enum name="FillInnerArc" value="2" />
+        </attr>
+        <attr name="innerProgressColor" format="color" />
+        <attr name="innerPadding" format="dimension" />
+        <attr name="outerColor" format="color" />
+        <attr name="outerSize" format="dimension" />
+        <attr name="reachCapRound" format="boolean" />
+    </declare-styleable>
+
+
+</resources>

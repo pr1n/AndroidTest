@@ -1,0 +1,22 @@
+<resources>
+
+    <style name="Theme.AndroidTest" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="windowActionBar">true</item>
+        <item name="isLightTheme">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="colorError">@color/colorError</item>
+
+        <item name="android:textColorPrimary">@color/textcolorPrimary</item>
+
+        <item name="android:fontFamily">""</item>
+        <item name="fontFamily">""</item>
+    </style>
+
+    <style name="Theme.AndroidTest.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>

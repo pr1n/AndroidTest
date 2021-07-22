@@ -1,0 +1,22 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        jcenter() // Warning: this repository is going to shut down soon
+        maven { url "https://jitpack.io" }
+        // 添加下面的内容
+        //TODO 需要优化
+        flatDir { dirs 'libs', '../library_auth/libs',"../module_advisory/libs" }
+        maven { url "https://dl.bintray.com/lizixian/StarrySky/" }
+        maven { url 'https://repo1.maven.org/maven2/' }
+//        maven { url 'https://dl.bintray.com/mikaelzero/maven' }
+    }
+}
+rootProject.name = "AndroidTest"
+include ':app'
+include ':DesignPattern'
+include ':CommonSDK'
+include ':Apes-Annotation'
+include ':Apes-Compiler'
+include ':user'

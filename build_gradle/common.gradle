@@ -1,0 +1,83 @@
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
+apply from: '../build_gradle/config.gradle'
+
+def cfg = rootProject.ext.android
+def apt = rootProject.ext.kapt
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+        arg("rxhttp_okhttp", rootProject.ext.version["okhttp_version"])
+    }
+}
+
+android {
+    compileSdkVersion cfg["compileSdkVersion"]
+    buildToolsVersion cfg["buildToolsVersion"]
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+    defaultConfig {
+        minSdkVersion cfg["minSdkVersion"]
+        targetSdkVersion cfg["targetSdkVersion"]
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true//svg
+        testInstrumentationRunner cfg["androidJUnitRunner"]
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a"//,"x86"
+        }
+    }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+    kotlinOptions { jvmTarget = 1.8 }
+
+    lintOptions {
+        disable 'InvalidPackage'
+        disable "ResourceType"
+        abortOnError false
+    }
+
+    /**
+     * 打包规则
+     */
+    buildTypes {
+        //测试
+        _test.initWith(debug)
+        _test {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        //预发
+        pretest.initWith(debug)
+        pretest {
+            signingConfig signingConfigs.debug
+        }
+        //正式环境——Debug
+        release_test.initWith(debug)
+        release_test {
+            signingConfig signingConfigs.debug
+        }
+    }
+
+}
+//repositories{
+//    flatDir{
+//        dirs 'libs'
+//    }
+//}
+dependencies {
+    kapt apt["lifecycle-compiler"]
+    kapt apt["room-compiler"]
+    kapt apt["arouter-compiler"]
+    kapt apt["glide"]
+    kapt apt["rxhttp"]
+    //test 单元测试使用
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
