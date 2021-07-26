@@ -3,27 +3,29 @@ package com.pr1n.androidtest.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import com.apesmedical.commonsdk.base.BaseSavedStateViewModel
+import androidx.lifecycle.asLiveData
+import com.apesmedical.commonsdk.base.newbase.BaseSavedStateViewModel
 import com.library.sdk.ext.logi
 import com.pr1n.androidtest.repo.MainRepository
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.onStart
 
 class ViewModel1(
     override val savedStateHandle: SavedStateHandle,
     override val repo: MainRepository,
 ) : BaseSavedStateViewModel<MainRepository>() {
 
-    private val _resultLiveData = MutableLiveData<String>()
+    private val _resultLiveData = MutableLiveData("")
     val resultLiveData: LiveData<String> get() = _resultLiveData
 
     fun getData() {
         launchUI {
             logi("CurrentThreadName -> ${Thread.currentThread().name}")
-            repo.getData("key" to "value") {
+            repo.getData {
+                addParams("key" to "value")
+            }.onStart {
                 chageResult("loading...")
-                delay(2000)
                 repo.test()
-            }.let(::chageResult)
+            }.asLiveData()
         }
     }
 

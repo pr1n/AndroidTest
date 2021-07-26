@@ -10,8 +10,7 @@ import androidx.activity.compose.setContent
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.apes.annotation.nav.Destination
-import com.apesmedical.commonsdk.UiKnife.UIConfig
-import com.apesmedical.commonsdk.base.BaseVMTripleView
+import com.apesmedical.commonsdk.base.newbase.BaseVMTripleView
 import com.google.accompanist.appcompattheme.AppCompatTheme
 import com.library.sdk.ext.logi
 import com.pr1n.androidtest.databinding.ActivityMainBinding

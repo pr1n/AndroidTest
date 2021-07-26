@@ -1,4 +1,4 @@
-package com.apesmedical.commonsdk.base
+package com.apesmedical.commonsdk.base.newbase
 
 import com.apesmedical.commonsdk.db.EmptyDao
 import com.apesmedical.commonsdk.db.MainDB

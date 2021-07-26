@@ -7,8 +7,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.apesmedical.commonsdk.app.startup.AbstractStartup
 import com.apesmedical.commonsdk.base.BaseActivityLifecycleCallbacks
-import com.apesmedical.commonsdk.base.LocalService
-import com.apesmedical.commonsdk.base.RemoteService
+import com.apesmedical.commonsdk.base.newbase.LocalService
+import com.apesmedical.commonsdk.base.newbase.RxHttpRemoteService
+import com.apesmedical.commonsdk.base.newbase.RemoteService
 import com.apesmedical.commonsdk.db.MainDB
 import com.library.sdk.ext.logi
 import com.pr1n.androidtest.repo.MainRepository
@@ -28,7 +29,7 @@ class AppStartup : AbstractStartup() {
 
 
     private val module = module {
-        single<RemoteService> { RemoteService }
+        single<RemoteService> { RxHttpRemoteService() }
         single<LocalService> { LocalService }
         single { MainDB.getDatabase(androidContext()) }
         factory<MainRepository> { MainRepositoryImpl() }
