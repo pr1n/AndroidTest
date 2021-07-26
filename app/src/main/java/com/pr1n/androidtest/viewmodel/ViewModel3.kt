@@ -1,7 +1,7 @@
 package com.pr1n.androidtest.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
-import com.apesmedical.commonsdk.base.BaseSavedStateViewModel
+import com.apesmedical.commonsdk.base.newbase.BaseSavedStateViewModel
 import com.pr1n.androidtest.repo.MainRepository
 
 class ViewModel3(

@@ -1,6 +1,7 @@
-package com.apesmedical.commonsdk.base
+package com.apesmedical.commonsdk.base.newbase
 
 import androidx.lifecycle.SavedStateHandle
+import com.apesmedical.commonsdk.base.BaseViewModel
 
 /**
  * Created by Beetle_Sxy on 2020/10/9.

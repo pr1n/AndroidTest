@@ -2,8 +2,9 @@ package com.pr1n.androidtest
 
 import android.content.Context
 import com.apesmedical.commonsdk.app.SDKAppLifecycles
-import com.apesmedical.commonsdk.base.LocalService
-import com.apesmedical.commonsdk.base.RemoteService
+import com.apesmedical.commonsdk.base.newbase.LocalService
+import com.apesmedical.commonsdk.base.newbase.RxHttpRemoteService
+import com.apesmedical.commonsdk.base.newbase.RemoteService
 import com.apesmedical.commonsdk.db.MainDB
 import com.apesmedical.commonsdk.delegate.AppLifecycles
 import com.apesmedical.commonsdk.delegate.ConfigModule
@@ -22,7 +23,7 @@ class AppConfiguration : ConfigModule {
 //            AppInitializer.getInstance(context).initializeComponent(MyInitializer::class.java)
 //        )
         builder.addModule(module {
-            single<RemoteService> { RemoteService }
+            single<RemoteService> { RxHttpRemoteService() }
             single<LocalService> { LocalService }
             single { MainDB.getDatabase(context) }
             factory<MainRepository> { MainRepositoryImpl() }

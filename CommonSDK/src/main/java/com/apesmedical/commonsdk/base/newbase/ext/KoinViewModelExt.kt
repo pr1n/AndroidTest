@@ -1,4 +1,4 @@
-package com.apesmedical.commonsdk.base
+package com.apesmedical.commonsdk.base.newbase.ext
 
 import androidx.activity.ComponentActivity
 import androidx.fragment.app.Fragment

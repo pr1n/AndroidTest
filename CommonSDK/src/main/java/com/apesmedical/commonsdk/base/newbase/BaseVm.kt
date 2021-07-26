@@ -1,16 +1,14 @@
-package com.apesmedical.commonsdk.base
+package com.apesmedical.commonsdk.base.newbase
 
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.apesmedical.commonsdk.UiKnife.UIConfig
-import com.apesmedical.commonsdk.http.Complete
-import com.apesmedical.commonsdk.http.Failure
-import com.apesmedical.commonsdk.http.Loading
-import com.apesmedical.commonsdk.http.ResultData
-import com.apesmedical.commonsdk.http.Success
-import com.library.sdk.ext.logi
+import com.apesmedical.commonsdk.base.BaseFragment
+import com.apesmedical.commonsdk.base.BaseView
+import com.apesmedical.commonsdk.base.newbase.ext.sharedStateViewModel
+import com.apesmedical.commonsdk.base.newbase.ext.stateViewModel
+import com.apesmedical.commonsdk.base.newbase.ext.stateViewModelTriple
 
 abstract class BaseVMView<DB : ViewDataBinding, VM : ViewModel>(@LayoutRes private val layoutRes: Int) :
     BaseView<DB>(layoutRes) {

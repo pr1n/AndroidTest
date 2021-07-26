@@ -1,4 +1,4 @@
-package com.apesmedical.commonsdk.base
+package com.apesmedical.commonsdk.base.newbase
 
 import org.koin.java.KoinJavaComponent.get
 

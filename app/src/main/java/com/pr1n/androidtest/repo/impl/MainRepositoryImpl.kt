@@ -1,24 +1,30 @@
 package com.pr1n.androidtest.repo.impl
 
-import com.apesmedical.commonsdk.base.postToAwait
-import com.apesmedical.commonsdk.base.postToFlow
+import com.apesmedical.commonsdk.base.newbase.IParamBuilder
+import com.apesmedical.commonsdk.base.newbase.ext.post
 import com.apesmedical.commonsdk.db.Empty
 import com.library.sdk.ext.logi
 import com.pr1n.androidtest.POST_URL
 import com.pr1n.androidtest.repo.MainRepository
 
 class MainRepositoryImpl : MainRepository {
-    override suspend fun getData(
-        vararg requestArgs: Pair<String, Any>,
-        before: suspend () -> Unit
-    ) =
-        remote.postToAwait<String>(POST_URL, *requestArgs) { it.also { before() } }
+    override fun getData(request: IParamBuilder.() -> Unit) =
+        remote.post<String> {
+            POST_URL
+            request(this)
+        }
 
-    override fun getDataFlow(vararg requestArgs: Pair<String, Any>) =
-        remote.postToFlow<String>("http://test-yys-api.xadazhihui.cn/consult/list", *requestArgs)
+    override fun getDataFlow(request: IParamBuilder.() -> Unit) =
+        remote.post<String> {
+            setUrl("http://test-yys-api.xadazhihui.cn/consult/list")
+            request(this)
+        }
 
-    override fun getDataFlow1(vararg requestArgs: Pair<String, Any>) =
-        remote.postToFlow<Int>("http://test-yys-api.xadazhihui.cn/consult/list", *requestArgs)
+    override fun getDataFlow1(request: IParamBuilder.() -> Unit) =
+        remote.post<Int> {
+            setUrl("http://test-yys-api.xadazhihui.cn/consult/list")
+            request(this)
+        }
 
     override fun test(vararg requestArgs: Pair<String, Any>) {
         val empty = Empty(100L, "Pr1n", 4)
