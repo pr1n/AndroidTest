@@ -32,7 +32,7 @@ class AppStartup : AbstractStartup() {
         single<RemoteService> { RxHttpRemoteService() }
         single<LocalService> { LocalService }
         single { MainDB.getDatabase(androidContext()) }
-        factory<MainRepository> { MainRepositoryImpl() }
+        factory<MainRepository> { MainRepositoryImpl(get(), get()) }
         viewModel { params -> ViewModel1(params.get(), get()) }
         viewModel { params -> ViewModel2(params.get(), get()) }
         viewModel { params -> ViewModel3(params.get(), get()) }

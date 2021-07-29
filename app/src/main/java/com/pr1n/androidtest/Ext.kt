@@ -1,5 +1,6 @@
 package com.pr1n.androidtest
 
+import android.view.View
 import com.blankj.utilcode.util.GsonUtils
 import kotlin.reflect.KProperty
 

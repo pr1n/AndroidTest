@@ -1,32 +1,34 @@
 package com.apesmedical.commonsdk.base.newbase
 
+import com.apesmedical.commonsdk.http.ResponseParser
 import com.apesmedical.commonsdk.http.parserToFlow
 import kotlinx.coroutines.CoroutineScope
 import rxhttp.asFlow
 import rxhttp.toDownload
-import rxhttp.wrapper.param.RxHttp
+import rxhttp.toParser
+import rxhttp.wrapper.param.RxHttpFormParam
 import rxhttp.wrapper.param.upload
 import kotlin.coroutines.EmptyCoroutineContext
 
 class RxHttpRemoteService : RemoteService {
-    override fun <T : Any> get(
+    override fun <T : Any> request(
         clazz: Class<T>,
-        builder: IRequestBuilder.() -> Unit
-    ) = buildHttpClient(builder)
-        .parserToFlow(clazz)
+        method: Method
+    ) = RxHttpBuilder(method).init().parserToFlow(clazz)
 
-    override fun <T : Any> post(
+    override suspend fun <T : Any> requestByData(
         clazz: Class<T>,
-        builder: IRequestBuilder.() -> Unit
-    ) = buildHttpClient(builder)
-        .parserToFlow(clazz)
+        method: Method
+    ) = RxHttpBuilder(method).init()
+        .toParser(ResponseParser<T>(clazz))
+        .await()
 
     override fun <T : Any> upload(
         clazz: Class<T>,
         coroutine: CoroutineScope,
-        builder: IUploadBuilder.() -> Unit,
+        method: Method,
         progress: suspend (Progress) -> Unit
-    ) = buildHttpClient(builder)
+    ) = (RxHttpBuilder(method).init() as RxHttpFormParam)
         .upload(coroutine)
         { progress(Progress(it.progress, it.currentSize, it.totalSize)) }
         .parserToFlow(clazz)
@@ -34,29 +36,10 @@ class RxHttpRemoteService : RemoteService {
     override fun <T : Any> download(
         clazz: Class<T>,
         destPath: String,
-        builder: IRequestBuilder.() -> Unit,
+        method: Method,
         progress: suspend (Progress) -> Unit
-    ) = buildHttpClient(builder)
+    ) = RxHttpBuilder(method).init()
         .toDownload(destPath, EmptyCoroutineContext)
         { progress(Progress(it.progress, it.currentSize, it.totalSize)) }
         .asFlow()
-
-    private fun buildHttpClient(builder: IRequestBuilder.() -> Unit) = with(Request.Builder()) {
-        builder(this)
-        val request = this.build()
-        (if (request.urlFormat != null) RxHttp.postForm(
-            request.urlFormat.first, request.urlFormat.second
-        ) else RxHttp.postForm(request.url)).also {
-            if (request.config != null) {
-                it.connectTimeout(request.config.connectTimeout.toInt())
-                it.readTimeout(request.config.readTimeout.toInt())
-                it.writeTimeout(request.config.writeTimeout.toInt())
-            }
-            if (request.headers.isNotEmpty()) it.addAllHeader(request.headers)
-            if (request.params.isNotEmpty()) it.addAll(request.params)
-            if (request.querys.isNotEmpty()) it.addAllQuery(request.querys)
-            if (request.files.isNotEmpty()) it.addFiles(request.files)
-            if (request.parts.isNotEmpty()) request.parts.forEach(it::addPart)
-        }
-    }
 }

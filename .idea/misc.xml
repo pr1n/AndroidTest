@@ -4,8 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/PrinceMan/AndroidStudioProjects/AndroidTest/CommonSDK/src/main/res/layout/activity_default.xml" value="0.11727456940222898" />
+        <entry key="..\:/Users/PrinceMan/AndroidStudioProjects/AndroidTest/app/src/main/res/layout/activity_main.xml" value="0.18591691995947315" />
         <entry key="..\:/Users/PrinceMan/AndroidStudioProjects/AndroidTest/app/src/main/res/layout/fragment_first.xml" value="0.18591691995947315" />
         <entry key="..\:/Users/PrinceMan/AndroidStudioProjects/AndroidTest/app/src/main/res/layout/fragment_second.xml" value="0.18591691995947315" />
+        <entry key="..\:/Users/PrinceMan/AndroidStudioProjects/AndroidTest/app/src/main/res/layout/item.xml" value="0.27445652173913043" />
+        <entry key="..\:/Users/PrinceMan/AndroidStudioProjects/AndroidTest/app/src/main/res/layout/item_footer.xml" value="0.18591691995947315" />
       </map>
     </option>
   </component>

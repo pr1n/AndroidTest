@@ -139,7 +139,7 @@ ext {
             "lifecycle-runtime"         : "androidx.lifecycle:lifecycle-runtime-ktx:${version['lifecycle_version']}",// Lifecycles only (without ViewModel or LiveData)
             "lifecycle-reactivestreams" : "androidx.lifecycle:lifecycle-reactivestreams-ktx:${version['lifecycle_version']}",// optional - ReactiveStreams support for LiveData
             //paging
-            "paging-runtime"            : "androidx.paging:paging-runtime-ktx:2.1.2",
+            //"paging-runtime"            : "androidx.paging:paging-runtime-ktx:2.1.2",
             // optional - Kotlin Extensions and Coroutines support for Room
             "room"                      : "androidx.room:room-ktx:${version['room_version']}",
             //WorkManager
@@ -162,7 +162,7 @@ ext {
 
             "core-testing"      : "androidx.arch.core:core-testing:2.1.0",// optional - Test helpers for LiveData
             //paging
-            "paging-common-ktx" : "androidx.paging:paging-common-ktx:2.1.2",// alternatively - without Android dependencies for testing
+            //"paging-common-ktx" : "androidx.paging:paging-common-ktx:2.1.2",// alternatively - without Android dependencies for testing
             //room
             "room-testin"       : "androidx.room:room-testing:${version['room_version']}",// optional - Test helpers
             //WorkManager

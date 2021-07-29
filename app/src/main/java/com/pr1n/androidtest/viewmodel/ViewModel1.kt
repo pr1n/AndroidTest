@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.apesmedical.commonsdk.base.newbase.BaseSavedStateViewModel
 import com.library.sdk.ext.logi
 import com.pr1n.androidtest.repo.MainRepository
@@ -19,15 +21,14 @@ class ViewModel1(
 
     fun getData() {
         launchUI {
-            logi("CurrentThreadName -> ${Thread.currentThread().name}")
-            repo.getData {
-                addParams("key" to "value")
-            }.onStart {
+            repo.getData("").onStart {
                 chageResult("loading...")
                 repo.test()
             }.asLiveData()
         }
     }
+
+    fun getPagerData() = repo.getPagerData().cachedIn(viewModelScope)
 
     fun chageResult(value: String) {
         // 生产前处理

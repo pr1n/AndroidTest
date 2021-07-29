@@ -1,30 +1,52 @@
 package com.pr1n.androidtest.repo.impl
 
-import com.apesmedical.commonsdk.base.newbase.IParamBuilder
-import com.apesmedical.commonsdk.base.newbase.ext.post
+import androidx.paging.ExperimentalPagingApi
+import com.apesmedical.commonsdk.base.newbase.Get
+import com.apesmedical.commonsdk.base.newbase.LocalService
+import com.apesmedical.commonsdk.base.newbase.Method
+import com.apesmedical.commonsdk.base.newbase.Post
+import com.apesmedical.commonsdk.base.newbase.RemoteService
+import com.apesmedical.commonsdk.base.newbase.ext.request
+import com.apesmedical.commonsdk.base.newbase.ext.requestByData
+import com.apesmedical.commonsdk.base.newbase.getPager
 import com.apesmedical.commonsdk.db.Empty
+import com.apesmedical.commonsdk.http.Success
+import com.google.gson.Gson
 import com.library.sdk.ext.logi
+import com.pr1n.androidtest.DoctorList
+import com.pr1n.androidtest.PAGER_URL
 import com.pr1n.androidtest.POST_URL
 import com.pr1n.androidtest.repo.MainRepository
 
-class MainRepositoryImpl : MainRepository {
-    override fun getData(request: IParamBuilder.() -> Unit) =
-        remote.post<String> {
-            POST_URL
-            request(this)
+class MainRepositoryImpl(override val remote: RemoteService, override val local: LocalService) :
+    MainRepository {
+    override fun getData(value: String) =
+        remote.request<String>(Get {
+            setUrl(POST_URL)
+            config { connectTimeout(1000) }
+        })
+
+    @ExperimentalPagingApi
+    override fun getPagerData() =
+        getPager {
+            val result = remote.requestByData<DoctorList>(Post {
+                setUrl(PAGER_URL)
+                addParam("page", it)
+            })
+            logi("result -> ${Gson().toJson(result.data)}")
+            if (result is Success) result.data?.doctor ?: emptyList()
+            else throw Exception("")
         }
 
-    override fun getDataFlow(request: IParamBuilder.() -> Unit) =
-        remote.post<String> {
-            setUrl("http://test-yys-api.xadazhihui.cn/consult/list")
-            request(this)
-        }
+    override fun getDataFlow(method: Method) =
+        remote.request<String>(Post {
+            setUrl(PAGER_URL)
+        })
 
-    override fun getDataFlow1(request: IParamBuilder.() -> Unit) =
-        remote.post<Int> {
-            setUrl("http://test-yys-api.xadazhihui.cn/consult/list")
-            request(this)
-        }
+    override fun getDataFlow1(method: Method) =
+        remote.request<Int>(Post {
+            setUrl(PAGER_URL)
+        })
 
     override fun test(vararg requestArgs: Pair<String, Any>) {
         val empty = Empty(100L, "Pr1n", 4)
