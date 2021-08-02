@@ -3,13 +3,11 @@ package com.pr1n.androidtest
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.PagerSnapHelper
-import androidx.recyclerview.widget.SnapHelper
 import com.apesmedical.commonsdk.UiKnife.UIConfig
 import com.apesmedical.commonsdk.base.newbase.BaseVMView
 import com.apesmedical.commonsdk.loadsir.observeAndShow
 import com.apesmedical.commonsdk.loadsir.regLoadSir
 import com.apesmedical.commonsdk.loadsir.show
-import com.library.sdk.ext.logi
 import com.pr1n.androidtest.databinding.ActivityTestBinding
 import com.pr1n.androidtest.viewmodel.ViewModel1
 import kotlinx.coroutines.flow.collectLatest

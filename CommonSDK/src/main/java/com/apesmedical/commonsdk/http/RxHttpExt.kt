@@ -1,5 +1,6 @@
 package com.apesmedical.commonsdk.http
 
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
@@ -12,4 +13,7 @@ fun <T> IRxHttp.parserToFlow(clazz: Class<T>) =
         .asFlow()
         .onStart { emit(Loading()) }
         .catch { emit(Failure(it.message ?: "", it)) }
-        .onCompletion { emit(Complete()) }
+        .onCompletion {
+            delay(100)
+            emit(Complete())
+        }

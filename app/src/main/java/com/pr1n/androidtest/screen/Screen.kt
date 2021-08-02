@@ -22,7 +22,10 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
@@ -73,10 +76,13 @@ fun HostNavScreen() {
 private fun FirstScreen(navController: NavHostController) {
     val viewModel = getStateViewModel<ViewModel1>()
 
-    val resultState by viewModel.resultLiveData.observeAsState(Loading())
-    Log.i("TAG", "FirstScreen: ${resultState}")
-    val isShowLoading = resultState is Complete<*>
-    val resultText = if (resultState is Success<*>) resultState.data.toString() else ""
+    val resultState by viewModel.resultLiveData.observeAsState(Complete())
+    Log.i("TAG", "FirstScreen: $resultState")
+    val isShowLoading = resultState !is Complete<*>
+    var resultText by remember{ mutableStateOf("")}
+    if (resultState is Loading) resultText = ""
+    if (resultState is Error) resultText = "Error: ${resultState.message}"
+    if (resultState is Success) resultText = resultState.data.toString()
 
     Scaffold(topBar = {
         TopAppBar(title = { Text(text = "First") })

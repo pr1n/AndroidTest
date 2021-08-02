@@ -27,7 +27,7 @@ class MainRepositoryImpl(override val remote: RemoteService, override val local:
     MainRepository {
     @ExperimentalPagingApi
     override fun getPagerData(): Flow<PagingData<DoctorList.Doctor>> =
-        getPager { pageIndex, pageSize ->
+        getPager { pageIndex, _ ->
             val result = remote.requestByData<DoctorList>(Post {
                 setUrl(CONSULT_URL)
                 addParam("page", pageIndex)

@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/CommonSDK" />
             <option value="$PROJECT_DIR$/DesignPattern" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/repository" />
             <option value="$PROJECT_DIR$/user" />
           </set>
         </option>
