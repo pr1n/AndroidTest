@@ -4,8 +4,16 @@ import android.app.Application
 import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
 import com.apesmedical.commonsdk.BuildConfig
+import com.apesmedical.commonsdk.loadsir.CustomCallback
+import com.apesmedical.commonsdk.loadsir.EmptyCallback
+import com.apesmedical.commonsdk.loadsir.ErrorCallback
+import com.apesmedical.commonsdk.loadsir.LoadingCallback
+import com.apesmedical.commonsdk.loadsir.NoDataCallback
+import com.apesmedical.commonsdk.loadsir.NoNetworkCallback
+import com.apesmedical.commonsdk.loadsir.TimeoutCallback
 import com.blankj.utilcode.util.Utils
 import com.jeremyliao.liveeventbus.LiveEventBus
+import com.kingja.loadsir.core.LoadSir
 import com.lzx.starrysky.StarrySky
 import com.rousetime.android_startup.AndroidStartup
 import com.rousetime.android_startup.Startup
@@ -39,6 +47,18 @@ class SdkStartup : AndroidStartup<Unit>() {
         )
 
         MMKV.initialize(application)
+
+        // Loadsir Initialization
+        LoadSir.beginBuilder()
+            .addCallback(EmptyCallback())
+            .addCallback(ErrorCallback())
+            .addCallback(LoadingCallback())
+            .addCallback(NoDataCallback())
+            .addCallback(NoNetworkCallback())
+            .addCallback(TimeoutCallback())
+            .addCallback(CustomCallback())
+            .setDefaultCallback(LoadingCallback::class.java)
+            .commit()
 
         application.runOnUiThread {
             Utils.init(application)

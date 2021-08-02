@@ -9,6 +9,7 @@ import com.rousetime.android_startup.AndroidStartup
 import okhttp3.Dispatcher
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.KoinApplication
@@ -62,6 +63,9 @@ class KoinStartup : AndroidStartup<KoinApplication>() {
                             sslParams.sSLSocketFactory,
                             sslParams.trustManager
                         ) //添加信任证书
+                        .addInterceptor(HttpLoggingInterceptor().also {
+                            it.level = HttpLoggingInterceptor.Level.BODY
+                        })
                         .hostnameVerifier { _, _ -> true } //忽略host验证
                         .dispatcher(Dispatcher(executorService))
                         .apply {

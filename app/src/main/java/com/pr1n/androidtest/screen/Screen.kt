@@ -20,6 +20,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -36,13 +37,18 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.apesmedical.commonsdk.http.Complete
+import com.apesmedical.commonsdk.http.Loading
+import com.apesmedical.commonsdk.http.Success
 import com.blankj.utilcode.util.ToastUtils
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.placeholder
 import com.google.accompanist.placeholder.shimmer
+import com.pr1n.androidtest.TestActivity
 import com.pr1n.androidtest.dialog.DefaultDialog
 import com.pr1n.androidtest.viewmodel.ViewModel1
 import kotlinx.coroutines.launch
+import org.jetbrains.anko.startActivity
 import org.koin.androidx.compose.getStateViewModel
 import kotlin.math.roundToInt
 
@@ -67,10 +73,10 @@ fun HostNavScreen() {
 private fun FirstScreen(navController: NavHostController) {
     val viewModel = getStateViewModel<ViewModel1>()
 
-    Log.i("TAG", "composeViewModel -> $viewModel")
-
-    val resultState = viewModel.resultLiveData.observeAsState()
-    //val resultState = viewModel.dataLiveData.observeAsState()
+    val resultState by viewModel.resultLiveData.observeAsState(Loading())
+    Log.i("TAG", "FirstScreen: ${resultState}")
+    val isShowLoading = resultState is Complete<*>
+    val resultText = if (resultState is Success<*>) resultState.data.toString() else ""
 
     Scaffold(topBar = {
         TopAppBar(title = { Text(text = "First") })
@@ -85,12 +91,12 @@ private fun FirstScreen(navController: NavHostController) {
             ) { Text(text = "toSecond", color = MaterialTheme.colors.error) }
 
             Button(
-                onClick = { viewModel.getData() },
+                onClick = { viewModel.getDataLiveData() },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(20.dp)
                     .placeholder(
-                        visible = "loading..." == resultState.value,
+                        visible = isShowLoading,
                         color = Color.Gray,
                         highlight = PlaceholderHighlight.shimmer(Color.LightGray)
                     )
@@ -98,7 +104,7 @@ private fun FirstScreen(navController: NavHostController) {
             ) { Text(text = "getData") }
 
             Text(
-                text = resultState.value ?: "",
+                text = resultText,
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
@@ -145,14 +151,16 @@ private fun SecondScreen(navController: NavHostController) {
             LocalLifecycleOwner.current,
             LocalSavedStateRegistryOwner.current
         )
-
+        val context = LocalContext.current
         CustomColumn {
             Text(text = "layout1", modifier = modifier.clickable {
                 scope.launch {
                     ToastUtils.showShort(dialog.show().toString())
                 }
             })
-            Text(text = "layout2", modifier = modifier)
+            Text(text = "layout2", modifier = modifier.clickable {
+                context.startActivity<TestActivity>()
+            })
             Text(text = "layout3", modifier = modifier)
         }
     }

@@ -8,8 +8,9 @@ import androidx.fragment.app.FragmentManager
 import com.apesmedical.commonsdk.app.startup.AbstractStartup
 import com.apesmedical.commonsdk.base.BaseActivityLifecycleCallbacks
 import com.apesmedical.commonsdk.base.newbase.LocalService
-import com.apesmedical.commonsdk.base.newbase.RxHttpRemoteService
+import com.apesmedical.commonsdk.base.newbase.OkHttpRemoteService
 import com.apesmedical.commonsdk.base.newbase.RemoteService
+import com.apesmedical.commonsdk.base.newbase.RxHttpRemoteService
 import com.apesmedical.commonsdk.db.MainDB
 import com.library.sdk.ext.logi
 import com.pr1n.androidtest.repo.MainRepository

@@ -5,24 +5,24 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 
 interface RemoteService {
-    fun <T : Any> request(
+    fun <T> request(
         clazz: Class<T>,
         method: Method
     ): Flow<ResultData<T>>
 
-    suspend fun <T : Any> requestByData(
+    suspend fun <T> requestByData(
         clazz: Class<T>,
         method: Method
     ): ResultData<T>
 
-    fun <T : Any> upload(
+    fun <T> upload(
         clazz: Class<T>,
         coroutine: CoroutineScope,
         method: Method,
         progress: suspend (Progress) -> Unit
     ): Flow<ResultData<T>>
 
-    fun <T : Any> download(
+    fun <T> download(
         clazz: Class<T>,
         destPath: String,
         method: Method,

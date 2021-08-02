@@ -16,7 +16,6 @@ class ViewModel2(
     override val repo: MainRepository
 ) : BaseSavedStateViewModel<MainRepository>() {
     val resultData = repo.getDataFlow(Post { addParam("page", 1) })
-        .onStart { logi("*-*-*-getDataFlow\$onStart()") }
         .asLiveData()
 
     val tripleResultData = liveData {

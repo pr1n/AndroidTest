@@ -34,7 +34,9 @@
                 <data android:scheme="https" />
             </intent-filter>
         </activity>
-        <activity android:name=".TestActivity" />
+        <activity
+            android:name=".TestActivity"
+            android:theme="@style/Theme.AndroidTest.NoActionBar" />
 
         <!--        <meta-data-->
         <!--            android:name="com.pr1n.androidtest.AppConfiguration"-->

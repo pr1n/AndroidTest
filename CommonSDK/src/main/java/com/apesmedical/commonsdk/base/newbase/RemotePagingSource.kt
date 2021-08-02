@@ -5,6 +5,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.apesmedical.commonsdk.http.Failure
+import com.apesmedical.commonsdk.http.ResultData
+import com.apesmedical.commonsdk.http.Success
 import com.library.sdk.ext.logi
 
 
@@ -25,6 +28,7 @@ class RemotePagingSource<T : Any>(private inline val block: suspend (pageIndex: 
             val pageIndex = params.key ?: DEFAULT_PAGE_INDEX
             // 获取数据
             val result = block(pageIndex, params.loadSize)
+            // 没有取到数据为加载完成
             if (result.isNullOrEmpty()) throw NoDataException()
             LoadResult.Page(
                 data = result,
@@ -33,13 +37,14 @@ class RemotePagingSource<T : Any>(private inline val block: suspend (pageIndex: 
             )
         } catch (e: Exception) {
             logi("Exception -> $e")
+            e.printStackTrace()
             LoadResult.Error(throwable = e)
         }
     }
 }
 
 @ExperimentalPagingApi
-inline fun <reified T : Any> IRepository.getPager(crossinline pagingLamda: suspend (page: Int) -> List<T>) =
+inline fun <reified T : Any> IRepository.getPager(crossinline pagingLamda: suspend (pageIndex: Int, pageSize: Int) -> List<T>) =
     Pager(
         // 分页配置
         config = PagingConfig(
@@ -54,7 +59,14 @@ inline fun <reified T : Any> IRepository.getPager(crossinline pagingLamda: suspe
         ),
         pagingSourceFactory = {
             RemotePagingSource { pageIndex, pageSize ->
-                pagingLamda(pageIndex)
+                pagingLamda(pageIndex, pageSize)
             }
         }
     ).flow
+
+fun <T, R: List<T>> ResultData<R>.toPagerData() =
+    when (this) {
+        is Success -> data ?: throw Exception("")
+        is Failure -> throw error!!
+        else -> throw Exception("")
+    }

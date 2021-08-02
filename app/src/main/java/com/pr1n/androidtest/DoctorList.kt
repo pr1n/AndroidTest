@@ -2,13 +2,16 @@ package com.pr1n.androidtest
 
 
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class DoctorList(
     @SerializedName("banner")
     val banner: List<Banner>,
     @SerializedName("doctor")
     val doctor: List<Doctor>
 ){
+    @Parcelize
     data class Doctor(
         @SerializedName("avatar")
         val avatar: String?,
@@ -36,6 +39,7 @@ data class DoctorList(
         val userId: Int?
     )
 
+    @Parcelize
     data class Banner(
         @SerializedName("content")
         val content: String,

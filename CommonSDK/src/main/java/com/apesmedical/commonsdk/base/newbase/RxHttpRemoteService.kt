@@ -1,6 +1,7 @@
 package com.apesmedical.commonsdk.base.newbase
 
 import com.apesmedical.commonsdk.http.ResponseParser
+import com.apesmedical.commonsdk.http.ResultData
 import com.apesmedical.commonsdk.http.parserToFlow
 import kotlinx.coroutines.CoroutineScope
 import rxhttp.asFlow
@@ -11,19 +12,19 @@ import rxhttp.wrapper.param.upload
 import kotlin.coroutines.EmptyCoroutineContext
 
 class RxHttpRemoteService : RemoteService {
-    override fun <T : Any> request(
+    override fun <T> request(
         clazz: Class<T>,
         method: Method
     ) = RxHttpBuilder(method).init().parserToFlow(clazz)
 
-    override suspend fun <T : Any> requestByData(
+    override suspend fun <T> requestByData(
         clazz: Class<T>,
         method: Method
     ) = RxHttpBuilder(method).init()
         .toParser(ResponseParser<T>(clazz))
         .await()
 
-    override fun <T : Any> upload(
+    override fun <T> upload(
         clazz: Class<T>,
         coroutine: CoroutineScope,
         method: Method,
@@ -33,7 +34,7 @@ class RxHttpRemoteService : RemoteService {
         { progress(Progress(it.progress, it.currentSize, it.totalSize)) }
         .parserToFlow(clazz)
 
-    override fun <T : Any> download(
+    override fun <T> download(
         clazz: Class<T>,
         destPath: String,
         method: Method,

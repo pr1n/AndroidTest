@@ -7,7 +7,9 @@ const val BASE_URL = "https://juejin.cn/"
 
 const val POST_URL = "https://juejin.cn/post/6844904100090347528#heading-3"
 
-const val PAGER_URL = "http://test-yys-api.xadazhihui.cn/consult/list"
+const val CONSULT_URL = "http://test-yys-api.xadazhihui.cn/consult/list"
+
+const val DOCTOR_SEARCH_URL = "http://test-yys-api.xadazhihui.cn/consult/doctor-search"
 
 //suspend inline fun <reified T : Any> postToAwait(
 //    url: String,

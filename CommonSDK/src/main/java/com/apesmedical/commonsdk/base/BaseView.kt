@@ -18,7 +18,6 @@ import com.apesmedical.commonsdk.ktx.KeyboardExt
 import com.library.sdk.ext.logi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
-import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 /**
  * Created by Beetle_Sxy on 2020/10/9.
@@ -67,8 +66,8 @@ abstract class BaseView<DB : ViewDataBinding>(@LayoutRes private val layoutRes: 
             when (val result = it) {
                 is Loading -> logi("*-*-*-*-*-Loading")
                 is Failure -> {
-                    logi("*-*-*-*-*-Failure -> message : ${result.message}, throwable : ${result.throwable}")
-                    failure(result.message ?: "", result.throwable ?: Exception())
+                    logi("*-*-*-*-*-Failure -> message : ${result.message}, throwable : ${result.error}")
+                    failure(result.message ?: "", result.error ?: Exception())
                 }
                 is Success -> {
                     logi("*-*-*-*-*-Success -> data : ${result.data}")

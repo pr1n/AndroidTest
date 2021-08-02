@@ -20,6 +20,8 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import java.io.IOException
+import java.lang.reflect.ParameterizedType
+import java.lang.reflect.Type
 import java.util.concurrent.TimeUnit
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -93,7 +95,6 @@ class OkHttpBuilder(private val method: Method) {
                         multiBodyBuilder.addPart(headers, paramBody)
                         request.parts.forEach(multiBodyBuilder::addPart)
                         request.files.forEach {
-                            it.value.asRequestBody()
                             multiBodyBuilder.addFormDataPart(it.key, null, it.value.asRequestBody())
                         }
                     }.build()
@@ -171,12 +172,21 @@ fun <T> Call.asFlow(clazz: Class<T>? = null) =
 suspend fun <T> Call.asData(clazz: Class<T>? = null): ResultData<T> = this.enqueue().let {
     val resultString = it.body?.string() ?: ""
     val result =
-        if (clazz != null) Gson().fromJson<ResponseApes<T>>(resultString, clazz)
-        else Gson().fromJson(resultString, object : TypeToken<ResponseApes<T>>() {}.type)
+        if (clazz != null) {
+            val type = ParameterizedTypeImpl(ResponseApes::class.java, arrayOf(clazz))
+            Gson().fromJson<ResponseApes<T>>(resultString, type)
+        } else Gson().fromJson(resultString, object : TypeToken<ResponseApes<T>>() {}.type)
     if (200 == result.code) {
         if (result.data != null) Success(result.data!!) else Failure(
             "Failure",
             Exception("Failure")
         )
     } else Failure("Failure", Exception("Failure"))
+}
+
+class ParameterizedTypeImpl(private val raw: Class<*>, private val args: Array<Type>) :
+    ParameterizedType {
+    override fun getActualTypeArguments() = args
+    override fun getRawType() = raw
+    override fun getOwnerType() = null
 }

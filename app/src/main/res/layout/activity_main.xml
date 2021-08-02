@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:itemCount="10"
             app:spanCount="2"
-            tools:listitem="@layout/item" />
+            tools:listitem="@layout/item_doctor" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
