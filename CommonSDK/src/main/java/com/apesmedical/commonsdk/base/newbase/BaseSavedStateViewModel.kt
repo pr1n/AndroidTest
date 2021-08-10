@@ -7,7 +7,7 @@ import com.apesmedical.commonsdk.base.BaseViewModel
  * Created by Beetle_Sxy on 2020/10/9.
  * 协程处理网络请求回调
  */
-abstract class BaseSavedStateViewModel<out Repo : IRepository> : BaseViewModel() {
+abstract class BaseSavedStateViewModel<out Repo : com.pr1n.repository.IRepository> : BaseViewModel() {
     protected abstract val savedStateHandle: SavedStateHandle
     protected abstract val repo: Repo
 }

@@ -4,12 +4,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import com.apesmedical.commonsdk.base.newbase.BaseSavedStateViewModel
-import com.apesmedical.commonsdk.base.newbase.Post
-import com.library.sdk.ext.logi
-import com.pr1n.androidtest.repo.MainRepository
+import com.pr1n.repository.remote.base.Post
+import com.pr1n.repository.repo.MainRepository
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.onStart
 
 class ViewModel2(
     override val savedStateHandle: SavedStateHandle,

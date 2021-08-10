@@ -5,13 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
-import androidx.databinding.DataBindingUtil
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.apesmedical.commonsdk.base.newbase.NoDataException
+import com.pr1n.repository.paging.NoDataException
 import com.apesmedical.commonsdk.base.newbase.ext.gone
 import com.apesmedical.commonsdk.base.newbase.ext.show
 import com.bumptech.glide.Glide
@@ -20,6 +19,8 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.pr1n.androidtest.databinding.ItemBannerBinding
 import com.pr1n.androidtest.databinding.ItemDoctorBinding
 import com.pr1n.androidtest.databinding.ItemFooterBinding
+import com.pr1n.repository.entity.Doctor
+import com.pr1n.repository.entity.DoctorList
 
 class DoctorAdapter :
     PagingDataAdapter<Doctor, DoctorAdapter.ViewHolder>(object :

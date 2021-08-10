@@ -1,18 +1,17 @@
 package com.pr1n.androidtest
 
-import com.apesmedical.commonsdk.base.newbase.OkHttpRemoteService
-import com.apesmedical.commonsdk.base.newbase.ParameterizedTypeImpl
-import com.apesmedical.commonsdk.base.newbase.Post
-import com.apesmedical.commonsdk.base.newbase.ext.requestByData
+import com.pr1n.repository.remote.base.OkHttpRemoteService
+import com.pr1n.repository.remote.base.ParameterizedTypeImpl
+import com.pr1n.repository.remote.base.Post
 import com.apesmedical.commonsdk.http.ResponseApes
 import com.google.gson.Gson
+import com.pr1n.repository.entity.Doctor
+import com.pr1n.repository.entity.DoctorList
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -231,9 +230,9 @@ class ExampleUnitTest {
             })
             println("result -> ${Gson().toJson(result)}")
         }.start()
-        //class com.pr1n.androidtest.DoctorList
+        //class com.pr1n.repository.entity.DoctorList
         // cannot be cast to class com.apesmedical.commonsdk.http.ResponseApes
-        // (com.pr1n.androidtest.DoctorList and
+        // (com.pr1n.repository.entity.DoctorList and
         // com.apesmedical.commonsdk.http.ResponseApes are in unnamed module of loader 'app')
 
 //        GlobalScope.launch {

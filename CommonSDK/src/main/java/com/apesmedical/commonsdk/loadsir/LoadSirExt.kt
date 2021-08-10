@@ -6,7 +6,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
-import com.apesmedical.commonsdk.base.newbase.NoDataException
+import com.pr1n.repository.NoDataException
 import com.apesmedical.commonsdk.http.Complete
 import com.apesmedical.commonsdk.http.Failure
 import com.apesmedical.commonsdk.http.Loading
@@ -29,7 +29,7 @@ fun <T> LoadService<*>.show(resultData: ResultData<T>) {
         is Failure ->
             when (resultData.error) {
                 is ConnectException -> showTimeout()
-                is NoDataException -> showNoData()
+                is com.pr1n.repository.NoDataException -> showNoData()
                 is UnknownHostException -> showNoNetwork()
                 else -> showError()
             }
@@ -45,7 +45,7 @@ fun LoadService<*>.show(states: CombinedLoadStates) {
         is LoadState.Error ->
             when (state.error) {
                 is ConnectException -> showTimeout()
-                is NoDataException -> showNoData()
+                is com.pr1n.repository.NoDataException -> showNoData()
                 is UnknownHostException -> showNoNetwork()
                 else -> showError()
             }

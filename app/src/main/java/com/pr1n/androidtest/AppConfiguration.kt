@@ -2,15 +2,15 @@ package com.pr1n.androidtest
 
 import android.content.Context
 import com.apesmedical.commonsdk.app.SDKAppLifecycles
-import com.apesmedical.commonsdk.base.newbase.LocalService
-import com.apesmedical.commonsdk.base.newbase.RxHttpRemoteService
-import com.apesmedical.commonsdk.base.newbase.RemoteService
-import com.apesmedical.commonsdk.db.MainDB
+import com.pr1n.repository.local.LocalService
+import com.pr1n.repository.remote.base.RxHttpRemoteService
+import com.pr1n.repository.remote.RemoteService
+import com.pr1n.repository.local.db.MainDB
 import com.apesmedical.commonsdk.delegate.AppLifecycles
 import com.apesmedical.commonsdk.delegate.ConfigModule
 import com.apesmedical.commonsdk.delegate.GlobalConfigModule
-import com.pr1n.androidtest.repo.MainRepository
-import com.pr1n.androidtest.repo.impl.MainRepositoryImpl
+import com.pr1n.repository.repo.MainRepository
+import com.pr1n.repository.repo.impl.MainRepositoryImpl
 import com.pr1n.androidtest.viewmodel.ViewModel1
 import com.pr1n.androidtest.viewmodel.ViewModel2
 import com.pr1n.androidtest.viewmodel.ViewModel3

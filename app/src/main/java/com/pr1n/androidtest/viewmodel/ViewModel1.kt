@@ -9,15 +9,24 @@ import androidx.paging.cachedIn
 import com.apesmedical.commonsdk.base.newbase.BaseSavedStateViewModel
 import com.apesmedical.commonsdk.http.ResultData
 import com.library.sdk.ext.logi
-import com.pr1n.androidtest.DoctorList
-import com.pr1n.androidtest.repo.MainRepository
+import com.pr1n.repository.entity.DoctorList
+import com.pr1n.repository.repo.MainRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.onStart
 
 class ViewModel1(
     override val savedStateHandle: SavedStateHandle,
     override val repo: MainRepository,
 ) : BaseSavedStateViewModel<MainRepository>() {
+
+    private val _stateFlow = MutableStateFlow("")
+    val stateFlow: StateFlow<String> get()= _stateFlow
+
+    fun test(){
+        _stateFlow.tryEmit("")
+    }
 
     private val _resultLiveData = MediatorLiveData<ResultData<DoctorList>>()
     val resultLiveData: LiveData<ResultData<DoctorList>> get() = _resultLiveData

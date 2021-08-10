@@ -7,17 +7,23 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.compose.setContent
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.apes.annotation.nav.Destination
 import com.apesmedical.commonsdk.base.newbase.BaseVMTripleView
 import com.google.accompanist.appcompattheme.AppCompatTheme
 import com.library.sdk.ext.logi
 import com.pr1n.androidtest.databinding.ActivityMainBinding
+import com.pr1n.androidtest.dialog.showNormalDialog
+import com.pr1n.androidtest.dialog.showNormalDialogFragment
 import com.pr1n.androidtest.screen.HostNavScreen
 import com.pr1n.androidtest.viewmodel.ViewModel1
 import com.pr1n.androidtest.viewmodel.ViewModel2
 import com.pr1n.androidtest.viewmodel.ViewModel3
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.sdk27.coroutines.onClick
+import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.getStateViewModel
 
 
@@ -33,9 +39,15 @@ class MainActivity :
         logi("getViewModel2: ${getStateViewModel<ViewModel2>()}")
         logi("getViewModel3: ${getStateViewModel<ViewModel3>()}")
 
-        setContent {
-            AppCompatTheme {
-                HostNavScreen()
+//        setContent {
+//            AppCompatTheme {
+//                HostNavScreen()
+//            }
+//        }
+
+        mDataBinding.showDialog.setOnClickListener {
+            lifecycleScope.launch {
+                toast("dialog result -> ${showNormalDialogFragment()}")
             }
         }
 
