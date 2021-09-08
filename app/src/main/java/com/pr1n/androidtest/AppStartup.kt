@@ -29,9 +29,9 @@ class AppStartup : AbstractStartup() {
 
 
     private val module = module {
-        single<RemoteService> { RxHttpRemoteService() }
-        single<LocalService> { LocalService }
         single { MainDB.getDatabase(androidContext()) }
+        factory<RemoteService> { RxHttpRemoteService() }
+        factory<LocalService> { LocalService }
         factory<MainRepository> { MainRepositoryImpl(get(), get()) }
         viewModel { params -> ViewModel1(params.get(), get()) }
         viewModel { params -> ViewModel2(params.get(), get()) }

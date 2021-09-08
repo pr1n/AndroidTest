@@ -1,6 +1,9 @@
 package com.pr1n.androidtest.screen
 
 import android.util.Log
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -37,13 +40,18 @@ import androidx.compose.ui.unit.constrainHeight
 import androidx.compose.ui.unit.constrainWidth
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.plusAssign
 import com.apesmedical.commonsdk.http.Complete
 import com.apesmedical.commonsdk.http.Loading
 import com.apesmedical.commonsdk.http.Success
 import com.blankj.utilcode.util.ToastUtils
+import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.google.accompanist.navigation.animation.composable
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
+import com.google.accompanist.navigation.material.ModalBottomSheetLayout
+import com.google.accompanist.navigation.material.bottomSheet
+import com.google.accompanist.navigation.material.rememberBottomSheetNavigator
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.placeholder
 import com.google.accompanist.placeholder.shimmer
@@ -60,16 +68,45 @@ value class Route private constructor(val routePath: String) {
     companion object {
         val FirstScreen = Route("/first")
         val SecondScreen = Route("/second")
+        val SheetScreen = Route("/sheet")
     }
 }
 
+@ExperimentalMaterialNavigationApi
+@ExperimentalAnimationApi
 @Composable
 fun HostNavScreen() {
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Route.FirstScreen.routePath) {
-        composable(Route.FirstScreen.routePath) { FirstScreen(navController) }
-        composable(Route.SecondScreen.routePath) { SecondScreen(navController) }
+    val animatedNavController = rememberAnimatedNavController()
+    val bottomSheetNavigator = rememberBottomSheetNavigator()
+    animatedNavController.navigatorProvider += bottomSheetNavigator
+    ModalBottomSheetLayout(bottomSheetNavigator = bottomSheetNavigator) {
+        AnimatedNavHost(
+            navController = animatedNavController,
+            startDestination = Route.FirstScreen.routePath
+        ) {
+            composable(route = Route.FirstScreen.routePath,
+                enterTransition = { initial, target -> slideInHorizontally(initialOffsetX = { 1000 }) },
+                exitTransition = { initial, target -> slideOutHorizontally(targetOffsetX = { -1000 }) },
+                popEnterTransition = { initial, target -> slideInHorizontally(initialOffsetX = { -1000 }) },
+                popExitTransition = { initial, target -> slideOutHorizontally(targetOffsetX = { 1000 }) })
+            { FirstScreen(animatedNavController) }
+
+            composable(route = Route.SecondScreen.routePath,
+                enterTransition = { initial, target -> slideInHorizontally(initialOffsetX = { 1000 }) },
+                exitTransition = { initial, target -> slideOutHorizontally(targetOffsetX = { -1000 }) },
+                popEnterTransition = { initial, target -> slideInHorizontally(initialOffsetX = { -1000 }) },
+                popExitTransition = { initial, target -> slideOutHorizontally(targetOffsetX = { 1000 }) })
+            { SecondScreen(animatedNavController) }
+            bottomSheet(Route.SheetScreen.routePath) {
+                Text(text = "This is a cool bottom sheet!", modifier = Modifier.padding(10.dp))
+            }
+        }
     }
+//    val navController = rememberNavController()
+//    NavHost(navController = navController, startDestination = Route.FirstScreen.routePath) {
+//        composable(Route.FirstScreen.routePath) { FirstScreen(navController) }
+//        composable(Route.SecondScreen.routePath) { SecondScreen(navController) }
+//    }
 }
 
 @Composable
@@ -79,7 +116,7 @@ private fun FirstScreen(navController: NavHostController) {
     val resultState by viewModel.resultLiveData.observeAsState(Complete())
     Log.i("TAG", "FirstScreen: $resultState")
     val isShowLoading = resultState !is Complete<*>
-    var resultText by remember{ mutableStateOf("")}
+    var resultText by remember { mutableStateOf("") }
     if (resultState is Loading) resultText = ""
     if (resultState is Error) resultText = "Error: ${resultState.message}"
     if (resultState is Success) resultText = resultState.data.toString()
@@ -95,6 +132,14 @@ private fun FirstScreen(navController: NavHostController) {
                     .padding(20.dp)
                     .background(Color.LightGray, RoundedCornerShape(5.dp))
             ) { Text(text = "toSecond", color = MaterialTheme.colors.error) }
+
+            Button(
+                onClick = { navController.navigate(Route.SheetScreen.routePath) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(20.dp)
+                    .background(Color.LightGray, RoundedCornerShape(5.dp))
+            ) { Text(text = "showSheet", color = MaterialTheme.colors.primaryVariant) }
 
             Button(
                 onClick = { viewModel.getDataLiveData() },

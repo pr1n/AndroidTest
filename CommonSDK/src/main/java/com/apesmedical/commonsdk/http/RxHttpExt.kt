@@ -8,8 +8,8 @@ import rxhttp.IRxHttp
 import rxhttp.asFlow
 import rxhttp.toParser
 
-fun <T> IRxHttp.parserToFlow(clazz: Class<T>) =
-    toParser(ResponseParser<T>(clazz))
+fun <T> IRxHttp.parserToFlow(responseParser: ResponseParser<T>) =
+    toParser(responseParser)
         .asFlow()
         .onStart { emit(Loading()) }
         .catch { emit(Failure(it.message ?: "", it)) }

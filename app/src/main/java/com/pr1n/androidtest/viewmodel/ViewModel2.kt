@@ -3,11 +3,19 @@ package com.pr1n.androidtest.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import com.apesmedical.commonsdk.base.newbase.BaseSavedStateViewModel
 import com.pr1n.repository.remote.base.Post
 import com.pr1n.repository.repo.MainRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 
 class ViewModel2(
     override val savedStateHandle: SavedStateHandle,
@@ -26,4 +34,26 @@ class ViewModel2(
 //        val flows = listOf(flow1, flow2, flow3)
 //        combine(flows) { it }.collectLatest(::emit)
     }
+
+    fun stateFlow(): Flow<String> {
+        val stateFlow = flow {
+            emit("result")
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = "initial"
+        )
+            .onStart {
+                emit("start")
+            }
+            .onCompletion {
+                emit("completion")
+            }
+            .catch {
+                emit("catch")
+            }
+        return stateFlow
+    }
+
+
 }

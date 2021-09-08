@@ -1,5 +1,6 @@
 package com.pr1n.androidtest
 
+import android.os.Parcelable
 import com.apesmedical.commonsdk.utlis.KVUtlis
 import com.apesmedical.commonsdk.utlis.mmkv
 import com.library.sdk.ext.logi
@@ -49,7 +50,7 @@ object UserDelegate {
 }
 
 @Parcelize
-data class User(val token: String, val userId: Long, val nickName: String, val type: Int) {
+data class User(val token: String, val userId: Long, val nickName: String, val type: Int) : Parcelable {
     companion object {
         val Empty = User("", 0L, "", 1)
     }

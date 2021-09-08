@@ -12,10 +12,20 @@ interface RemoteService {
         method: Method
     ): Flow<ResultData<T>>
 
+    fun <T> requestToList(
+        clazz: Class<T>,
+        method: Method
+    ): Flow<ResultData<List<T>>>
+
     suspend fun <T> requestByData(
         clazz: Class<T>,
         method: Method
     ): ResultData<T>
+
+    suspend fun <T> requestByDatas(
+        clazz: Class<T>,
+        method: Method
+    ): ResultData<List<T>>
 
     fun <T> upload(
         clazz: Class<T>,

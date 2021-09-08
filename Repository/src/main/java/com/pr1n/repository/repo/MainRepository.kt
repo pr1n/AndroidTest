@@ -2,13 +2,13 @@ package com.pr1n.repository.repo
 
 import androidx.paging.PagingData
 import com.apesmedical.commonsdk.http.ResultData
-import com.pr1n.repository.base.IRepository
+import com.pr1n.repository.base.Repo
 import com.pr1n.repository.entity.Doctor
 import com.pr1n.repository.entity.DoctorList
 import com.pr1n.repository.remote.base.Method
 import kotlinx.coroutines.flow.Flow
 
-interface MainRepository : IRepository {
+interface MainRepository : Repo {
     fun getPagerData(): Flow<PagingData<DoctorList.Doctor>>
 
     fun getDoctorList(keyword: String): Flow<PagingData<Doctor>>

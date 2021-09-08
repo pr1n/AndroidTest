@@ -1,10 +1,7 @@
 package com.pr1n.repository.entity
 
-
 import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
-
-class Doctors: ArrayList<Doctor>()
 
 @Serializable
 data class Doctor(

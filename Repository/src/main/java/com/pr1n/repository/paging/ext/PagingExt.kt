@@ -6,14 +6,14 @@ import androidx.paging.PagingConfig
 import com.apesmedical.commonsdk.http.Failure
 import com.apesmedical.commonsdk.http.ResultData
 import com.apesmedical.commonsdk.http.Success
-import com.pr1n.repository.base.IRepository
-import com.pr1n.repository.paging.DEFAULT_INITIAL_PAGE_SIZE
-import com.pr1n.repository.paging.DEFAULT_PAGE_SIZE
+import com.pr1n.repository.base.Repo
 import com.pr1n.repository.paging.RemotePagingSource
+import com.pr1n.repository.paging.config.PagingConfig.DEFAULT_INITIAL_PAGE_SIZE
+import com.pr1n.repository.paging.config.PagingConfig.DEFAULT_PAGE_SIZE
 
 
 @ExperimentalPagingApi
-inline fun <reified T : Any> IRepository.getPager(crossinline pagingLamda: suspend (pageIndex: Int, pageSize: Int) -> List<T>) =
+inline fun <reified T : Any> Repo.getPager(crossinline pagingLamda: suspend (pageIndex: Int, pageSize: Int) -> List<T>) =
     Pager(
         // 分页配置
         config = PagingConfig(

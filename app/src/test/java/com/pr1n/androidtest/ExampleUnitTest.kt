@@ -5,8 +5,9 @@ import com.pr1n.repository.remote.base.ParameterizedTypeImpl
 import com.pr1n.repository.remote.base.Post
 import com.apesmedical.commonsdk.http.ResponseApes
 import com.google.gson.Gson
-import com.pr1n.repository.entity.Doctor
+import com.library.sdk.ext.toBoolean
 import com.pr1n.repository.entity.DoctorList
+import com.pr1n.repository.ext.requestByData
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
@@ -28,8 +29,9 @@ class ExampleUnitTest {
 
     @Test
     fun test() {
-        val result = con<Doctor>()
-        result
+        println("-----> ${"1".toInt().toBoolean()}")
+//        val result = con<Doctor>()
+//        result
     }
 
     inline fun <reified T> con(): ResponseApes<List<T>>? {

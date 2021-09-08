@@ -3,7 +3,7 @@ package com.pr1n.repository.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.library.sdk.ext.logi
-import com.pr1n.repository.exception.NoDataException
+import com.apesmedical.commonsdk.base.newbase.exception.NoDataException
 import com.pr1n.repository.paging.config.PagingConfig
 
 class RemotePagingSource<T : Any>(private inline val block: suspend (pageIndex: Int, pageSize: Int) -> List<T>) :

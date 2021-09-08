@@ -6,19 +6,19 @@ import com.apesmedical.commonsdk.http.Success
 import com.library.sdk.ext.logi
 import com.pr1n.repository.entity.Doctor
 import com.pr1n.repository.entity.DoctorList
-import com.pr1n.repository.entity.Doctors
 import com.pr1n.repository.entity.Empty
-import com.pr1n.repository.repo.MainRepository
+import com.pr1n.repository.ext.request
+import com.pr1n.repository.ext.requestByData
+import com.pr1n.repository.ext.requestByDatas
 import com.pr1n.repository.local.LocalService
 import com.pr1n.repository.paging.ext.getPager
 import com.pr1n.repository.paging.ext.toPagerData
+import com.pr1n.repository.remote.RemoteService
 import com.pr1n.repository.remote.base.Method
 import com.pr1n.repository.remote.base.Post
-import com.pr1n.repository.remote.RemoteService
 import com.pr1n.repository.remote.const.CONSULT_URL
 import com.pr1n.repository.remote.const.DOCTOR_SEARCH_URL
-import com.pr1n.repository.request
-import com.pr1n.repository.requestByData
+import com.pr1n.repository.repo.MainRepository
 import kotlinx.coroutines.flow.Flow
 
 class MainRepositoryImpl(override val remote: RemoteService, override val local: LocalService) :
@@ -37,7 +37,7 @@ class MainRepositoryImpl(override val remote: RemoteService, override val local:
     @ExperimentalPagingApi
     override fun getDoctorList(keyword: String): Flow<PagingData<Doctor>> =
         getPager { pageIndex, _ ->
-            remote.requestByData<Doctors>(Post {
+            remote.requestByDatas<Doctor>(Post {
                 setUrl(DOCTOR_SEARCH_URL)
                 addParam("keyword", keyword)
                 addParam("page", pageIndex)

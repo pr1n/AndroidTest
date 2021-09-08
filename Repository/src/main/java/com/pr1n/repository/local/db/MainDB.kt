@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.pr1n.repository.entity.Empty
 import com.pr1n.repository.local.dao.EmptyDao
 import kotlinx.coroutines.InternalCoroutinesApi
 

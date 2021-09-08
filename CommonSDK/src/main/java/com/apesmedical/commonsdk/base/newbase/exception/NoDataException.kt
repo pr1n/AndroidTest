@@ -1,3 +1,3 @@
-package com.pr1n.repository.exception
+package com.apesmedical.commonsdk.base.newbase.exception
 
 class NoDataException(message: String = "") : Exception(message)

@@ -30,7 +30,14 @@ android {
     }
 }
 
+apply plugin: 'kotlin-kapt'
+apply from: '../build_gradle/config.gradle'
+
+def apt = rootProject.ext.kapt
+
 dependencies {
+    kapt apt["lifecycle-compiler"]
+    kapt apt["room-compiler"]
 
     implementation project ("::CommonSDK")
 

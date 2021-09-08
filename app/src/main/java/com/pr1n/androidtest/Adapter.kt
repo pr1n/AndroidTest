@@ -10,7 +10,7 @@ import androidx.paging.LoadStateAdapter
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.pr1n.repository.paging.NoDataException
+import com.apesmedical.commonsdk.base.newbase.exception.NoDataException
 import com.apesmedical.commonsdk.base.newbase.ext.gone
 import com.apesmedical.commonsdk.base.newbase.ext.show
 import com.bumptech.glide.Glide
